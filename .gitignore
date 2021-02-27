@@ -1,0 +1,5 @@
+#Ignoring virutal enviroment for Python
+.venv/
+
+#Ignoring Python temporary files
+__pycache__
