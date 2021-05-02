@@ -44,8 +44,9 @@ clip_boxes = False # Whether or not to clip the anchor boxes to lie entirely wit
 variances = [0.1, 0.1, 0.2, 0.2] # The variances by which the encoded target coordinates are divided as in the original implementation
 normalize_coords = True
 
-# 1: Build the Keras model.
+# --------------------------------------------------------------------------------------
 
+# 1: Build the Keras model.
 K.clear_session() # Clear previous models from memory.
 
 model = ssd_300(image_size=(img_height, img_width, img_channels),
@@ -66,7 +67,7 @@ model = ssd_300(image_size=(img_height, img_width, img_channels),
 # 2: Load some weights into the model.
 
 # TODO: Set the path to the weights you want to load.
-weights_path = 'path/to/VGG_ILSVRC_16_layers_fc_reduced.h5'
+weights_path = 'VGG_weights/VGG_ILSVRC_16_layers_fc_reduced.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -74,29 +75,15 @@ model.load_weights(weights_path, by_name=True)
 #    If you want to follow the original Caffe implementation, use the preset SGD
 #    optimizer, otherwise I'd recommend the commented-out Adam optimizer.
 
-#adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-sgd = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
-
+adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+#sgd = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
+model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
-model.compile(optimizer=sgd, loss=ssd_loss.compute_loss)
-
-# TODO: Set the path to the `.h5` file of the model to be loaded.
-model_path = 'path/to/trained/model.h5'
-
-# We need to create an SSDLoss object in order to pass that to the model loader.
-ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
-
-K.clear_session() # Clear previous models from memory.
-
-model = load_model(model_path, custom_objects={'AnchorBoxes': AnchorBoxes,
-                                               'L2Normalization': L2Normalization,
-                                               'compute_loss': ssd_loss.compute_loss})
+# --------------------------------------------------------------------------------------
 
 # 1: Instantiate two `DataGenerator` objects: One for training, one for validation.
-
 # Optional: If you have enough memory, consider loading the images into memory for the reasons explained above.
-
 train_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
 val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
 
@@ -105,21 +92,21 @@ val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=Non
 # TODO: Set the paths to the datasets here.
 
 # The directories that contain the images.
-VOC_2007_images_dir      = '../../datasets/VOCdevkit/VOC2007/JPEGImages/'
-VOC_2012_images_dir      = '../../datasets/VOCdevkit/VOC2012/JPEGImages/'
+VOC_2007_images_dir      = 'datasets/VOC/VOCdevkit/VOC2007/JPEGImages/'
+VOC_2012_images_dir      = 'datasets/VOC/VOCdevkit/VOC2012/JPEGImages/'
 
 # The directories that contain the annotations.
-VOC_2007_annotations_dir      = '../../datasets/VOCdevkit/VOC2007/Annotations/'
-VOC_2012_annotations_dir      = '../../datasets/VOCdevkit/VOC2012/Annotations/'
+VOC_2007_annotations_dir      = 'datasets/VOC/VOCdevkit/VOC2007/Annotations/'
+VOC_2012_annotations_dir      = 'datasets/VOC/VOCdevkit/VOC2012/Annotations/'
 
 # The paths to the image sets.
-VOC_2007_train_image_set_filename    = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
-VOC_2012_train_image_set_filename    = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/train.txt'
-VOC_2007_val_image_set_filename      = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/val.txt'
-VOC_2012_val_image_set_filename      = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/val.txt'
-VOC_2007_trainval_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt'
-VOC_2012_trainval_image_set_filename = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/trainval.txt'
-VOC_2007_test_image_set_filename     = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/test.txt'
+VOC_2007_train_image_set_filename    = 'datasets/VOC/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
+VOC_2012_train_image_set_filename    = 'datasets/VOC/VOCdevkit/VOC2012/ImageSets/Main/train.txt'
+VOC_2007_val_image_set_filename      = 'datasets/VOC/VOCdevkit/VOC2007/ImageSets/Main/val.txt'
+VOC_2012_val_image_set_filename      = 'datasets/VOC/VOCdevkit/VOC2012/ImageSets/Main/val.txt'
+VOC_2007_trainval_image_set_filename = 'datasets/VOC/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt'
+VOC_2012_trainval_image_set_filename = 'datasets/VOC/VOCdevkit/VOC2012/ImageSets/Main/trainval.txt'
+VOC_2007_test_image_set_filename     = 'datasets/VOC/VOCdevkit/VOC2007/ImageSets/Main/test.txt'
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -167,7 +154,7 @@ val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
 
 # 3: Set the batch size.
 
-batch_size = 32 # Change the batch size if you like, or if you run into GPU memory issues.
+batch_size = 5 # Change the batch size if you like, or if you run into GPU memory issues.
 
 # 4: Set the image transformations for pre-processing and data augmentation options.
 
