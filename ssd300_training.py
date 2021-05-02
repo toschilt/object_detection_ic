@@ -84,8 +84,8 @@ model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 # 1: Instantiate two `DataGenerator` objects: One for training, one for validation.
 # Optional: If you have enough memory, consider loading the images into memory for the reasons explained above.
-train_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
-val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
+train_dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None)
+val_dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None)
 
 # 2: Parse the image and label lists for the training and validation datasets. This can take a while.
 
@@ -142,15 +142,15 @@ val_dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
 # option in the constructor, because in that cas the images are in memory already anyway. If you don't
 # want to create HDF5 datasets, comment out the subsequent two function calls.
 
-train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval.h5',
-                                  resize=False,
-                                  variable_image_size=True,
-                                  verbose=True)
+#train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval.h5',
+#                                  resize=False,
+#                                  variable_image_size=True,
+#                                  verbose=True)
 
-val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
-                                resize=False,
-                                variable_image_size=True,
-                                verbose=True)
+#val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
+#                                resize=False,
+#                                variable_image_size=True,
+#                                verbose=True)
 
 # 3: Set the batch size.
 
