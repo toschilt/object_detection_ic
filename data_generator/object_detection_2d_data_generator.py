@@ -408,8 +408,8 @@ class DataGenerator:
                            'horse', 'motorbike', 'person', 'pottedplant',
                            'sheep', 'sofa', 'train', 'tvmonitor'],
                   include_classes = 'all',
-                  exclude_truncated=False,
-                  exclude_difficult=False,
+                  exclude_truncated=True,
+                  exclude_difficult=True,
                   ret=False,
                   verbose=True):
         '''
@@ -472,7 +472,7 @@ class DataGenerator:
             # Loop over all images in this dataset.
             for image_id in it:
 
-                filename = '{}'.format(image_id) + '.jpg'
+                filename = '{}'.format(image_id) + '.png'
                 self.filenames.append(os.path.join(images_dir, filename))
 
                 if not annotations_dir is None:
@@ -493,25 +493,25 @@ class DataGenerator:
                         class_id = self.classes.index(class_name)
                         # Check whether this class is supposed to be included in the dataset.
                         if (not self.include_classes == 'all') and (not class_id in self.include_classes): continue
-                        pose = obj.find('pose', recursive=False).text
-                        truncated = int(obj.find('truncated', recursive=False).text)
-                        if exclude_truncated and (truncated == 1): continue
-                        difficult = int(obj.find('difficult', recursive=False).text)
-                        if exclude_difficult and (difficult == 1): continue
+                        #pose = obj.find('pose', recursive=False).text
+                        #truncated = int(obj.find('truncated', recursive=False).text)
+                        #if exclude_truncated and (truncated == 1): continue
+                        #difficult = int(obj.find('difficult', recursive=False).text)
+                        #if exclude_difficult and (difficult == 1): continue
                         # Get the bounding box coordinates.
                         bndbox = obj.find('bndbox', recursive=False)
-                        xmin = int(bndbox.xmin.text)
-                        ymin = int(bndbox.ymin.text)
-                        xmax = int(bndbox.xmax.text)
-                        ymax = int(bndbox.ymax.text)
+                        xmin = float(bndbox.xmin.text)
+                        ymin = float(bndbox.ymin.text)
+                        xmax = float(bndbox.xmax.text)
+                        ymax = float(bndbox.ymax.text)
                         item_dict = {'folder': folder,
                                      'image_name': filename,
                                      'image_id': image_id,
                                      'class_name': class_name,
                                      'class_id': class_id,
-                                     'pose': pose,
-                                     'truncated': truncated,
-                                     'difficult': difficult,
+                                     #'pose': pose,
+                                     #'truncated': truncated,
+                                     #'difficult': difficult,
                                      'xmin': xmin,
                                      'ymin': ymin,
                                      'xmax': xmax,
@@ -520,8 +520,9 @@ class DataGenerator:
                         for item in self.labels_output_format:
                             box.append(item_dict[item])
                         boxes.append(box)
-                        if difficult: eval_neutr.append(True)
-                        else: eval_neutr.append(False)
+                        #if difficult: eval_neutr.append(True)
+                        #else: 
+                        eval_neutr.append(False)
 
                     self.labels.append(boxes)
                     self.eval_neutral.append(eval_neutr)
