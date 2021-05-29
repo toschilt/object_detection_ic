@@ -90,10 +90,13 @@ val_dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None
 # 2: Parse the image and label lists for the training and validation datasets. This can take a while.
 
 # TODO: Set the paths to the datasets here.
+myDataSet_train_images_dir = 'myDatasets/Training/JPEGImages/'
+myDataSet_train_annotations_dir = 'myDatasets/Training/Annotations/'
+myDataSet_trainval_image_set_filename = 'myDatasets/Training/ImageSets/Main/default.txt'
 
-myDataSet_images_dir = 'myDatasets/JPEGImages/'
-myDataSet_annotations_dir = 'myDatasets/Annotations/'
-myDataSet_trainval_image_set_filename = 'myDatasets/ImageSets/Main/default.txt'
+myDataSet_test_images_dir = 'myDatasets/Testing/JPEGImages/'
+myDataSet_test_annotations_dir = 'myDatasets/Testing/Annotations/'
+myDataSet_test_image_set_filename = 'myDatasets/Testing/ImageSets/Main/default.txt'
 
 # The directories that contain the images.
 #VOC_2007_images_dir      = 'datasets/VOC/VOCdevkit/VOC2007/JPEGImages/'
@@ -116,18 +119,18 @@ myDataSet_trainval_image_set_filename = 'myDatasets/ImageSets/Main/default.txt'
 classes = ['background',
            'Plant']
 
-train_dataset.parse_xml(images_dirs=[myDataSet_images_dir],
+train_dataset.parse_xml(images_dirs=[myDataSet_train_images_dir],
                         image_set_filenames=[myDataSet_trainval_image_set_filename],
-                        annotations_dirs=[myDataSet_annotations_dir],
+                        annotations_dirs=[myDataSet_train_annotations_dir],
                         classes=classes,
                         include_classes='all',
                         exclude_truncated=False,
                         exclude_difficult=False,
                         ret=False)
 
-val_dataset.parse_xml(images_dirs=[myDataSet_images_dir],
-                      image_set_filenames=[myDataSet_trainval_image_set_filename],
-                      annotations_dirs=[myDataSet_annotations_dir],
+val_dataset.parse_xml(images_dirs=[myDataSet_test_images_dir],
+                      image_set_filenames=[myDataSet_test_image_set_filename],
+                      annotations_dirs=[myDataSet_test_annotations_dir],
                       classes=classes,
                       include_classes='all',
                       exclude_truncated=False,
