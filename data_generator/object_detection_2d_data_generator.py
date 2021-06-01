@@ -1146,9 +1146,6 @@ class DataGenerator:
                     for k in range(0, len(batch_X[i][j])):
                         if(len(batch_X[i][j][k]) != 3):
                             print('len(batch_X[', i, '][', j, '][', k, ']) = ', len(batch_X[i][j][k]))
-                        for l in range(0, len(batch_X[i][j][k])):
-                            #if(len(batch_X[i][j][k][l]) != 3):
-                            print('len(batch_X[', i, '][', j, '][', k, '][', l , ']) = ', len(batch_X[i][j][k][l]))
 
             batch_X = np.array(batch_X)
             #batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
