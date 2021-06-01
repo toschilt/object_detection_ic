@@ -1138,13 +1138,13 @@ class DataGenerator:
             
             print('len(batch_X) = ', len(batch_X))
             for i in range(0, len(batch_X)):
-                if(len(batch_X[i]) != 300)
+                if(len(batch_X[i]) != 300):
                     print('len(batch_X[', i, ']) = ', len(batch_X[i]))
                 for j in range(0, len(batch_X[i])):
-                    if(len(batch_X[i][j]) != 300)
+                    if(len(batch_X[i][j]) != 300):
                         print('len(batch_X[', i, '][', j, ']) = ', len(batch_X[i][j]))
                     for k in range(0, len(batch_X[i][j])):
-                        if(len(batch_X[i][j][k]) != 3)
+                        if(len(batch_X[i][j][k]) != 3):
                             print('len(batch_X[', i, '][', j, '][', k, ']) = ', len(batch_X[i][j][k]))
 
             batch_X = np.array(batch_X)
