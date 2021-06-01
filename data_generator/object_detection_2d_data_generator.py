@@ -1140,7 +1140,7 @@ class DataGenerator:
             for i in range(0, len(batch_X)):
                 print('len(batch_X[', i, ']) = ', len(batch_X[i]))
                 for j in range(0, len(batch_X[i])):
-                    print('len(batch_X[', i, '][', j, ']) = 'len(batch_X[i][j]))
+                    print('len(batch_X[', i, '][', j, ']) = ', len(batch_X[i][j]))
 
             #batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
             if (batch_X.size == 0):
