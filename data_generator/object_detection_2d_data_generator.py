@@ -1136,7 +1136,7 @@ class DataGenerator:
             #          number of channels.
             
             
-            print('len(batch_X) = ', len(batch_X))
+            #print('len(batch_X) = ', len(batch_X))
             for i in range(0, len(batch_X)):
                 if(len(batch_X[i]) != 300):
                     print('len(batch_X[', i, ']) = ', len(batch_X[i]))
