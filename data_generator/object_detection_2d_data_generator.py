@@ -1150,6 +1150,7 @@ class DataGenerator:
 
             batch_X = np.array(batch_X)
 
+            print("\nMOMENTO DO DEBUG!\n")
             if (batch_X.size == 0):
                 for i in range(0, len(batch_X)):
                     print('len(batch_X[', i, ']) = ', len(batch_X[i]))

@@ -201,7 +201,7 @@ train_generator = train_dataset.generate(batch_size=batch_size,
                                          label_encoder=ssd_input_encoder,
                                          returns={'processed_images',
                                                   'encoded_labels'},
-                                         keep_images_without_gt=False)
+                                         keep_images_without_gt=True)
 
 val_generator = val_dataset.generate(batch_size=batch_size,
                                      shuffle=False,
@@ -210,7 +210,7 @@ val_generator = val_dataset.generate(batch_size=batch_size,
                                      label_encoder=ssd_input_encoder,
                                      returns={'processed_images',
                                               'encoded_labels'},
-                                     keep_images_without_gt=False)
+                                     keep_images_without_gt=True)
 
 # Get the number of samples in the training and validations datasets.
 train_dataset_size = train_dataset.get_dataset_size()
