@@ -1118,6 +1118,7 @@ class DataGenerator:
 
             if batch_items_to_remove:
                 for j in sorted(batch_items_to_remove, reverse=True):
+                    print("REMOVENDO ALGUMA COISA AQUI FILHÃO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: " + j)
                     # This isn't efficient, but it hopefully shouldn't need to be done often anyway.
                     batch_X.pop(j)
                     batch_filenames.pop(j)
@@ -1133,8 +1134,6 @@ class DataGenerator:
             # CAUTION: Converting `batch_X` into an array will result in an empty batch if the images have varying sizes
             #          or varying numbers of channels. At this point, all images must have the same size and the same
             #          number of channels.
-            for lala in batch_X:
-                print(lala)
             
             batch_X = np.array(batch_X)
             if (batch_X.size == 0):
