@@ -1136,6 +1136,10 @@ class DataGenerator:
             #          number of channels.
             
             batch_X = np.array(batch_X)
+            print('len(batch_X) = ', len(batch_X))
+            for i in range(0, len(batch_X)):
+                print('len(batch_X[', i, ']) = ', len(batch_x[i]))
+
             #batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
             if (batch_X.size == 0):
                 raise DegenerateBatchError("You produced an empty batch. This might be because the images in the batch vary " +
