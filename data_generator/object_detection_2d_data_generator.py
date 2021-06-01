@@ -1135,20 +1135,29 @@ class DataGenerator:
             #          or varying numbers of channels. At this point, all images must have the same size and the same
             #          number of channels.
             
-            
+            #batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
+
             #print('len(batch_X) = ', len(batch_X))
-            for i in range(0, len(batch_X)):
-                if(len(batch_X[i]) != 300):
-                    print('len(batch_X[', i, ']) = ', len(batch_X[i]))
-                for j in range(0, len(batch_X[i])):
-                    if(len(batch_X[i][j]) != 300):
-                        print('len(batch_X[', i, '][', j, ']) = ', len(batch_X[i][j]))
-                    for k in range(0, len(batch_X[i][j])):
-                        if(len(batch_X[i][j][k]) != 3):
-                            print('len(batch_X[', i, '][', j, '][', k, ']) = ', len(batch_X[i][j][k]))
+            #for i in range(0, len(batch_X)):
+            #    if(len(batch_X[i]) != 300):
+            #        print('len(batch_X[', i, ']) = ', len(batch_X[i]))
+            #    for j in range(0, len(batch_X[i])):
+            #        if(len(batch_X[i][j]) != 300):
+            #            print('len(batch_X[', i, '][', j, ']) = ', len(batch_X[i][j]))
+            #        for k in range(0, len(batch_X[i][j])):
+            #            if(len(batch_X[i][j][k]) != 3):
+            #                print('len(batch_X[', i, '][', j, '][', k, ']) = ', len(batch_X[i][j][k]))
 
             batch_X = np.array(batch_X)
-            #batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
+
+            if (batch_X.size == 0):
+                for i in range(0, len(batch_X)):
+                    print('len(batch_X[', i, ']) = ', len(batch_X[i]))
+                    for j in range(0, len(batch_X[i])):
+                        print('len(batch_X[', i, '][', j, ']) = ', len(batch_X[i][j]))
+                        for k in range(0, len(batch_X[i][j])):
+                            print('len(batch_X[', i, '][', j, '][', k, ']) = ', len(batch_X[i][j][k]))
+
             if (batch_X.size == 0):
                 raise DegenerateBatchError("You produced an empty batch. This might be because the images in the batch vary " +
                                            "in their size and/or number of channels. Note that after all transformations " +
