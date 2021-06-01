@@ -836,7 +836,7 @@ class DataGenerator:
                  label_encoder=None,
                  returns={'processed_images', 'encoded_labels'},
                  keep_images_without_gt=False,
-                 degenerate_box_handling='remove'):
+                 degenerate_box_handling='warn'):
         '''
         Generates batches of samples and (optionally) corresponding labels indefinitely.
 
