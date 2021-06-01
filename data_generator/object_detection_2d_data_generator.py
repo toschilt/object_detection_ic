@@ -1119,8 +1119,6 @@ class DataGenerator:
 
             if batch_items_to_remove:
                 for j in sorted(batch_items_to_remove, reverse=True):
-                    print("REMOVENDO ALGUMA COISA AQUI FILHÃO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: ")
-                    print(j)
                     # This isn't efficient, but it hopefully shouldn't need to be done often anyway.
                     batch_X.pop(j)
                     batch_filenames.pop(j)
@@ -1137,8 +1135,8 @@ class DataGenerator:
             #          or varying numbers of channels. At this point, all images must have the same size and the same
             #          number of channels.
             
-            #batch_X = np.array(batch_X)
-            batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
+            batch_X = np.array(batch_X)
+            #batch_X = np.array(list(itertools.zip_longest(*batch_X, fillvalue=0))).T
             if (batch_X.size == 0):
                 raise DegenerateBatchError("You produced an empty batch. This might be because the images in the batch vary " +
                                            "in their size and/or number of channels. Note that after all transformations " +
