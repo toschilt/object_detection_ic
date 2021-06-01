@@ -1118,7 +1118,8 @@ class DataGenerator:
 
             if batch_items_to_remove:
                 for j in sorted(batch_items_to_remove, reverse=True):
-                    print("REMOVENDO ALGUMA COISA AQUI FILHÃO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: " + j)
+                    print("REMOVENDO ALGUMA COISA AQUI FILHÃO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: ")
+                    print(j)
                     # This isn't efficient, but it hopefully shouldn't need to be done often anyway.
                     batch_X.pop(j)
                     batch_filenames.pop(j)
