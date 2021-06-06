@@ -10,3 +10,6 @@ datasets/
 myDatasets/
 *.h5
 *.csv
+
+#Ignoring models
+firstTestModel
