@@ -33,7 +33,7 @@ img_width = 300
 K.clear_session() # Clear previous models from memory.
 
 model = ssd_300(image_size=(img_height, img_width, 3),
-                n_classes=2,
+                n_classes=1,
                 mode='inference',
                 l2_regularization=0.0005,
                 scales=[0.1, 0.2, 0.37, 0.54, 0.71, 0.88, 1.05], # The scales for MS COCO are [0.07, 0.15, 0.33, 0.51, 0.69, 0.87, 1.05]
@@ -59,7 +59,7 @@ model = ssd_300(image_size=(img_height, img_width, 3),
 # 2: Load the trained weights into the model.
 
 # TODO: Set the path of the trained weights.
-weights_path = 'ssd300_pascal_07+12_epoch-37_loss-4.1043_val_loss-3.6004.h5'
+weights_path = 'ssd300_pascal_07+12_epoch-96_loss-3.7699_val_loss-3.4425.h5'
 #weights_path = 'VGG_weights/VGG_ILSVRC_16_layers_fc_reduced.h5'
 
 model.load_weights(weights_path, by_name=True)
@@ -88,9 +88,9 @@ y_pred = model.predict(input_images)
 
 confidence_threshold = 0
 
-y_pred_thresh = [y_pred[k][y_pred[k,:,1] >= confidence_threshold] for k in range(y_pred.shape[0])]
+y_pred_thresh = [y_pred[k][y_pred[k,:,1] > confidence_threshold] for k in range(y_pred.shape[0])]
 
-np.set_printoptions(precision=2, suppress=True, linewidth=90)
+np.set_printoptions(precision=2, suppress=False, linewidth=90)
 print("Predicted boxes:\n")
 print('   class   conf xmin   ymin   xmax   ymax')
 print(y_pred_thresh[0])
