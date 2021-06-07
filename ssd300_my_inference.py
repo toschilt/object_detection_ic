@@ -119,4 +119,4 @@ for box in y_pred_thresh[0]:
     current_axis.add_patch(plt.Rectangle((xmin, ymin), xmax-xmin, ymax-ymin, color=color, fill=False, linewidth=2))  
     current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor':color, 'alpha':1.0})
 
-plt.show()
+plt.savefig('image.jpg')
