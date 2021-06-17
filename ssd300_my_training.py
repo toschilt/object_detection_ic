@@ -67,7 +67,7 @@ model = ssd_300(image_size=(img_height, img_width, img_channels),
 # 2: Load some weights into the model.
 
 # TODO: Set the path to the weights you want to load.
-weights_path = 'VGG_weights/VGG_ILSVRC_16_layers_fc_reduced.h5'
+weights_path = 'ssd300_pascal_07+12_epoch-117_loss-3.7500_val_loss-3.4334.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -256,8 +256,8 @@ callbacks = [model_checkpoint,
              terminate_on_nan]
 
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
-initial_epoch   = 0
-final_epoch     = 120
+initial_epoch   = 117
+final_epoch     = 1000
 steps_per_epoch = 1000
 
 history = model.fit_generator(generator=train_generator,
