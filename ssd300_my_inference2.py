@@ -31,7 +31,7 @@ img_width = 300
 #model_path = 'ssd300_pascal_07+12_epoch-37_loss-4.1043_val_loss-3.6004.h5'
 
 #Modelo novo
-model_path = 'ssd300_pascal_07+12_epoch-96_loss-3.7699_val_loss-3.4425.h5'
+model_path = 'ssd300_pascal_07+12_epoch-117_loss-3.7500_val_loss-3.4334.h5'
 #model_path = 'VGG_weights/VGG_ILSVRC_16_layers_fc_reduced.h5'
 
 # We need to create an SSDLoss object in order to pass that to the model loader.
@@ -60,7 +60,7 @@ y_pred = model.predict(input_images)
 
 print(y_pred.shape)
 
-confidence_threshold = 0.5
+confidence_threshold = 0.25
 
 y_pred_thresh = [y_pred[k][y_pred[k,:,1] > confidence_threshold] for k in range(y_pred.shape[0])]
 
