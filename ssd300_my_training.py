@@ -67,7 +67,7 @@ model = ssd_300(image_size=(img_height, img_width, img_channels),
 # 2: Load some weights into the model.
 
 # TODO: Set the path to the weights you want to load.
-weights_path = 'ssd300_pascal_07+12_epoch-95_loss-3.7386_val_loss-3.3837.h5'
+weights_path = 'ssd300_pascal_07+12_epoch-100_loss-3.9667_val_loss-3.4287.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -223,11 +223,11 @@ print("Number of images in the validation dataset:\t{:>6}".format(val_dataset_si
 
 def lr_schedule(epoch):
     if epoch < 300:
-        return 0.001
-    elif epoch < 450:
         return 0.0001
-    else:
+    elif epoch < 450:
         return 0.00001
+    else:
+        return 0.000001
 
 # Define model callbacks.
 
@@ -256,7 +256,7 @@ callbacks = [model_checkpoint,
              terminate_on_nan]
 
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
-initial_epoch   = 95
+initial_epoch   = 100
 final_epoch     = 1000
 steps_per_epoch = 1000
 
