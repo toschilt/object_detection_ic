@@ -1,0 +1,15 @@
+#Ignoring virutal enviroment for Python
+.venv/
+
+#Ignoring Python temporary files
+__pycache__
+
+#Ignoring datasets and VGG pré-trained weights
+VGG_weights/
+datasets/
+myDatasets/
+*.h5
+*.csv
+
+#Ignoring models
+firstTestModel
